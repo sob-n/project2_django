@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-{% if user.id == qna.author.id %}
+{% if user.is_staff == 1 or user.id == qna.author.id %}
+    {% if user.id == qna.author.id %}
     <button type="button" class="modify" id="{{qna.id}}">편집</button>
+    {% endif %}
+    <button type="button" class="delete" id="{{qna.id}}">삭제</button>
 {% endif %}
+
+
+
+
     <div class="header">
         <p class="create_date">{{qna.create_date}}
         {% if qna.modified_date %}

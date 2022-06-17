@@ -31,7 +31,7 @@ def modify(request,qna_id):
         qna.secret = request.POST.get("secret_checked")
         qna.modified_date = timezone.now()
         qna.save()
-        return redirect("/qna")
+        return redirect("/qna/detail/"+str(qna_id))
 
 def create(request):
     if request.method == "POST":
@@ -45,18 +45,7 @@ def create(request):
     else:
         return render(request, 'qna/qnaform.html')
 
-###########
-
-def update(request,todo_id):
-    todo=Todo.objects.get(id=todo_id)
-    if todo.end_date:
-        todo.end_date=None
-    else:
-        todo.end_date=timezone.now()
-    todo.save()
-    return redirect("/todo/list/")
-
-def delete(request,todo_id):
-    todo = Todo.objects.get(id=todo_id)
-    todo.delete()
-    return redirect("/todo/list/")
+def delete(request,qna_id):
+    qna = QnA.objects.get(id=qna_id)
+    qna.delete()
+    return redirect("/qna")
