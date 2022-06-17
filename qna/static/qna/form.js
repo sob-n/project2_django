@@ -3,7 +3,6 @@ if(document.querySelector("#loginrequired")){
     window.location.href = '/account/login';
 }
 
-
 document.querySelector("#question").addEventListener("keypress",function(e){
     let account_info = document.querySelector(".right a").innerHTML
     if (account_info == "login"){
