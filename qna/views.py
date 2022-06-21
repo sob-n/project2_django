@@ -43,7 +43,7 @@ def create(request):
         qna.save()
         return redirect("/qna/")
     else:
-        return render(request, 'qna/qnaform.html')
+        return render(request,'qna/qnaform.html')
 
 def delete(request,qna_id):
     qna = QnA.objects.get(id=qna_id)

@@ -9,7 +9,7 @@ class QnA(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(null=True,blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    secret = models.CharField(max_length=3)
+    secret = models.CharField(max_length=10)
 
     def __str__(self):
         return self.question

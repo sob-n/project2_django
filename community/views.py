@@ -25,14 +25,33 @@ def community(request):
 
 def detail(request,content_id):
     content=Community.objects.get(id=content_id)
-    # comment_list=Comment.objects.get(content=content_id)
-    if request.method=="GET":
-        return render(request,"community/community_detail.html",{"content":content,"comment_list":comment_list})
+    comment_list=Comment.objects.filter(content_id=content_id)
+    if request.method == "GET":
+        return render(request, "community/community_detail.html", {"content": content, "comment_list": comment_list})
     else:
         comment = Comment(
-            user = request.user,
-            ceate_date = timezone.now(),
-            content = content_id,
-            comment = request.POST.get('comment'))
+            author=request.user,
+            create_date=timezone.now(),
+            content_id=content_id,
+            comment=request.POST.get('comment'))
         comment.save()
-        return render(request,"community/community_detail.html",{"content":content})
+        loc=str("/community/detail/"+str(content_id))
+        return redirect(loc)
+
+def delete(request,content_id):
+    content = Community.objects.get(id=content_id)
+    content.delete()
+    return redirect("/community")
+
+# def comment_edit(request,content_id,comment_id):
+#     content = Community.objects.get(id=content_id)
+#     comment_list = Comment.objects.filter(content_id=content_id)
+#     comment_m = Comment.objects.get(id=comment_id)
+#     if request.method == "GET":
+#         return render(request, "community/community_detail.html",{"content": content, "comment_list": comment_list,"comment_m":comment_m})
+#     else :
+#         comment_m.modified_date = timezone.now()
+#         comment_m.comment = request.POST.get('comment')
+#         comment_m.save()
+#         return redirect("/qna/detail/"+str(content_id))
+

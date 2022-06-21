@@ -3,37 +3,38 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'qna/list.css'%}">
 <div>
-  <h1>배너 자리</h1>
+  <h1>QnA</h1>
 </div>
-<table>
-  <tr>
-    <th>번호</th>
-    <th>목록</th>
-    <th>등록일</th>
-    <th>답변</th>
-
-  </tr>
+<div class="head">
+    <p class="title"><b>목록</b></p>
+    <p class="create_date"><b>등록일</b></p>
+    <p class="notanswered"><b>답변</b></p>
+</div>
+<hr>
 {% for qna in qna_list %}
-  <tr>
-  <td class="no">{{qna.id}}</td>
-  {% if user.id == qna.author.id or user.is_staff == 1 %}
-  <td class="title" id="{{qna.id}}"><a href="{% url 'qna:qna_detail' qna.id %}">{{qna.title}}</a></td>
+
+<div class="content_bx">
+  <div class="content">
+    {% if user.id == qna.author.id or user.is_staff == 1 %}
+  <p class="title" id="{{qna.id}}"><a href="{% url 'qna:qna_detail' qna.id %}">{{qna.title}}</a></p>
   {% else %}
     {% if qna.secret == "yes" %}
-    <td><i>비밀글입니다.</i></td>
+    <p class="secret_title"><i>비밀글입니다.</i></p>
     {% else %}
-    <td class="title" id="{{qna.id}}"><a href="{% url 'qna:qna_detail' qna.id %}">{{qna.title}}</a></td>
+    <p class="title" id="{{qna.id}}"><a href="{% url 'qna:qna_detail' qna.id %}">{{qna.title}}</a></p>
     {% endif %}
   {% endif %}
-    <td class="create_date">{{qna.create_date}}</td>
+    <p class="create_date">{{qna.create_date}}</p>
     {% if qna.answer %}
-    <td class="answered">답변 완료</td>
+    <p class="answered">답변 완료</p>
     {% else %}
-    <td class="notanswered"></td>
+    <p class="notanswered"></p>
     {% endif %}
-  </tr>
+    </div>
+</div>
 {% endfor %}
-</table>
-<input type="button" value="글쓰기" id="form">
+<hr>
+<input class="add_btn" type="button" value="글쓰기" id="form">
+<!--<input class="add_btn" type="button" value="내글보기" id="form">-->
 <script src="{% static 'qna/list.js'%}"></script>
 {% endblock %}

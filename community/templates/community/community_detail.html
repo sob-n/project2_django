@@ -5,32 +5,43 @@
 <div class="content_bx">
 <p class="author">{{content.author}}</p>
 <p class="create_date">{{content.create_date}}</p>
-<p class="content"></p>
+<p class="content">{{content.content}}</p>
 <!--    <img>-->
 <p class="category">{{content.category}}</p>
 <div class="likes">
-    <img src="" alt="">
+<!--    <img src="{% static 'community/image/likes.png'%}" alt="">-->
+<!--    <img src="{% static 'community/image/likes_2.png'%}" alt="">-->
     <p class="likes"></p>
 </div>
     <div class="comment">
-    <img src="" alt="">
+<!--    <img src="{% static 'community/image/comment.png'%}" alt="">-->
+<!--    <img src="{% static 'community/image/comment_2.png'%}" alt="">-->
 <p class="comment"></p>
 </div>
 </div>
 <hr>
 <div class="comment_bx">
 {% for comment in comment_list%}
+    <div class="comment" id="{{comment.id}}">
     <p class="user">{{comment.user}}</p>
     <p class="comment">{{comment.comment}}</p>
     <p class="create_date">{{comment.create_date}}</p>
-    {%endblock%}
+    {%if user.id == content.author.id or user.is_staff == 1 %}
+    {%if user.id == content.author.id %}
+<!--    <p class="edit"><a href="{{content.id}}/{{comment.id}}">편집</a></p>-->
+    {% endif %}
+    <p class="delete">삭제</p>
+    {% endif %}
+    {%endfor%}
+    </div>
 </div>
+
 
 <form method="post">
 {% csrf_token %}
-<div class="edit_comment">
+<div class="comment">
   <textarea class="form-control" name="comment" id="comment" required autocomplete="off" minlength="1" maxlength="199" placeholder="바르고 고운 말을 사용합시다." cols="60" rows="3"></textarea>
-<!--        <input type="hidden" value="hiddencss : resize:none">-->
+<!--    <input type="hidden" value="hiddencss : resize:none">-->
   <button class="upload" type="submit"></button>
 </div>
 </form>

@@ -6,8 +6,7 @@ app_name="community"
 
 urlpatterns = [
     path("", views.community, name="content_list"),
-    # path("editor/<int:qna_id>", views.modify, name="content_m_editor"),
-    # path("editor/", views.create, name="content_editor"),
-    path("detail/<int:content_id>",views.detail,name="qna_detail"),
-    # path("delete/<int:qna_id>",views.delete,name="qna_delete"),
+    # path("detail/<int:content_id>/<int:comment_id>", views.comment_edit, name="comment_editor"),
+    path("detail/<int:content_id>",views.detail,name="content_detail"),
+    path("detail/delete/<int:content_id>",views.delete,name="content_delete"),
 ]

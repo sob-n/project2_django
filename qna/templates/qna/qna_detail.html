@@ -1,43 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-{% if user.is_staff == 1 or user.id == qna.author.id %}
-    {% if user.id == qna.author.id %}
-    <button type="button" class="modify" id="{{qna.id}}">편집</button>
-    {% endif %}
-    <button type="button" class="delete" id="{{qna.id}}">삭제</button>
-{% endif %}
+<link rel="stylesheet" href="{% static 'qna/detail.css'%}">
+<div>
+  <h1>QnA</h1>
+</div>
 
-
-
-
-    <div class="header">
-        <p class="create_date">{{qna.create_date}}
-        {% if qna.modified_date %}
-            <i class="gray">(수정됨)</i>
-        {% endif %}</p>
-        <p class="author">작성자 : {{qna.author}}</p>
-    </div>
-    <div class="body_q">
-        <p class="question">{{qna.question}}</p>
-    </div>
-        <div class="body_a">
-    {% if qna.answer %}
-        <span>운영자<p class="answer">{{qna.answer}}</p></span>
-    {% else %}
-        <p class="notanswered">아직 답변이 달리지 않았습니다.</p>
+<div class="content_bx">
+    <div class="question_bx">
+        <div class="title">
+        <p clss="title"><b>{{qna.title}}</b></p>
         </div>
-        {% if user.is_staff %}
+<hr>
+    <p class="author">{{qna.author}}</p>
+        <div class="create_date">
+            <p class="create_date">{{qna.create_date}}
+            {% if qna.modified_date %}
+            <i class="gray">(수정됨)</i>
+            {% endif %}</p>
+        </div>
+
+        <div class="body_q">
+        <p class="question">{{qna.question}}</p>
+        </div>
+    </div>
+    <hr>
+    <div class="btn_bx">
+    {% if user.is_staff == 1 or user.id == qna.author.id %}
+        {% if user.id == qna.author.id %}
+        <button type="button" class="modify" id="{{qna.id}}">편집</button>
+        {% endif %}
+    <button type="button" class="delete" id="{{qna.id}}">삭제</button>
+    {% endif %}
+    <button type="button" class="go_list">목록으로</button>
+    </div>
+    <div class="answer_bx"></div>
+        <div class="body_a">
+            {% if qna.answer %}
+            <p class="tg">운영자</p>
+            <p class="answer">{{qna.answer}}</p>
+
+            {% else %}
+            {% if user.is_staff %}
+        </div>
         <div>
             <form method="post">
             {% csrf_token %}
-            <textarea class="form-control" name="answer" id="answer" required autocomplete="off" minlength="5" maxlength="2000" placeholder="내용을 입력하세요." cols="80" rows="15">{{qna.answer}}</textarea>
-<!--        <input type="hidden" value="hiddencss : resize:none">-->
+            <textarea class="form-control" name="answer" id="answer" required autocomplete="off" minlength="5" maxlength="2000" placeholder="내용을 입력하세요." rows="10">{{qna.answer}}</textarea>
+            <div>
                 <button type="submit" class="submit">등록</button>
+            </div>
             </form>
         </div>
-        {% endif %}
+        {%else%}
+        <p class="notanswered">아직 답변이 달리지 않았습니다.</p>
+    </div>
+    {%endif%}
     {% endif %}
-<button type="button" class="go_list">목록으로</button>
+</div>
+
 <script src="{% static 'qna/detail.js'%}"></script>
 {% endblock %}

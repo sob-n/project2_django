@@ -31,13 +31,13 @@
 
 <div class="content_bx">
     {% for content in content_list%}
-  <div class="content">
+  <div class="content" id="{{content.id}}">
     <p class="author">{{content.author}}</p>
     <p class="create_time">{{content.create_date}}</p>
-    {%if user.id == qna.author.id or user.is_staff == 1 %}
+    {%if user.id == content.author.id or user.is_staff == 1 %}
     <p class="more">...(text_rotate)</p>
     <div class="undisplay" id="more">
-      {%if user.id == qna.author.id %}
+      {%if user.id == content.author.id %}
       <p class="edit">편집</p>
       {% endif %}
       <p class="delete">삭제</p>
@@ -45,7 +45,7 @@
     {% else %}
     <p class="report">신고</p>
     {% endif %}
-    <p class="content"></p>
+    <p class="content"><a href="{% url 'community:content_detail' content.id %}">{{content.content}}</a></p>
 <!--    <img>-->
     <p class="category">{{content.category}}</p>
     <div class="likes">
@@ -61,9 +61,6 @@
 
 </div>
 
-<div class="new_content">
-  <button type="button"></button>
-</div>
 
 
 <script src="{% static 'community/community.js'%}"></script>
