@@ -1,0 +1,16 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'nav.css'%}">
+<nav>
+  <ul>
+    <li><a href="#">home</a></li>
+    <li><a href="#">news</a></li>
+    <li><a href="{% url 'todo:list' %}">todoList</a></li>
+    {% if user.is_authenticated %}
+    <li class="right"><a href="{% url 'account:logout' %}">logout</a></li>
+    {% else %}
+    <li class="right"><a href="{% url 'account:login' %}">login</a></li>
+    {% endif %}
+    <li><a href="{% url 'qna:qna_view' %}">QnA</a></li>
+
+  </ul>
+</nav>

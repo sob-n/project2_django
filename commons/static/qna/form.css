@@ -1,0 +1,57 @@
+input#secret_checked{
+ position: absolute;
+ left: 70%;
+ display:inline;
+}
+input#secret_checked[type="checkbox"] {width: 70px; height: 28px; display: inline-block; -webkit-appearance: none; margin-right: 3px; background-color: #ededed; border-radius: 50px; position: absolute; right: 10px; top: 285px; margin-top: -15px; transition: all .3s ease; cursor:pointer;}
+input#secret_checked[type="checkbox"]:before {content: '공개글'; position: absolute; left: 20%; top: 40%; margin-top: -7px; opacity: .7;}
+input#secret_checked:checked[type="checkbox"] {background-color:#c84f6f; transition: all .3s ease;}
+input#secret_checked:checked[type="checkbox"]:before {content:'비밀글'; color:#fff;}
+
+
+textarea{
+resize:none;
+width:90%;
+ border:none;
+ border-top: 1px solid #969696;
+ border-bottom: 1px solid #969696;
+}
+input{
+ border:none;
+ width:70%;
+ height:25px;
+ border-bottom: 1px solid #969696
+}
+div.content_bx{
+    margin:5% 10%;
+}
+h1{
+color:rgb(35 35 35);
+ text-align:center;
+ margin: 60px 0px 10px 0px;
+}
+hr{
+ color: #ccc;
+
+}
+
+div{
+ margin: 25px
+}
+
+div.undisplay{
+display:none
+}
+
+button{
+border:none;
+ border-radius:20%;
+ height:2.2em;
+ position: absolute;
+ right:22%;
+ color : color:rgb(35 35 35);
+}
+
+button.go_list{
+ right:26%
+}
